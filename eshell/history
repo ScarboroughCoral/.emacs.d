@@ -1,0 +1,6 @@
+ls
+cd ..
+rm .emacs
+ls
+rm -rf .emacs
+cd .emacs.d/
