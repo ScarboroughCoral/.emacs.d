@@ -20,6 +20,7 @@
     (set-face-attribute 'default nil :font "Source Code Pro for Powerline 11")))
 
 
-
+(setq display-line-numbers-type 'relative)
+(global-display-line-numbers-mode t)
 
 (provide 'init-ui)
