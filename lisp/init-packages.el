@@ -16,5 +16,23 @@
   :defer nil
   :config (which-key-mode))
 
+;; Show the delimiters as rainbow color
+(use-package rainbow-delimiters
+  :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+(use-package highlight-parentheses
+  :init (add-hook 'prog-mode-hook 'highlight-parentheses-mode))
+
+;; Settings for company
+(use-package company
+  :diminish
+  :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
+  :init (add-hook 'after-init-hook 'global-company-mode)
+  :config
+  (setq company-minimum-prefix-length 1
+        company-show-quick-access t))
+
+;; collections of useful command
+(use-package crux)
+
 
 (provide 'init-packages)
