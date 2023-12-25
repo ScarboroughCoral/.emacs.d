@@ -9,6 +9,7 @@
 (require 'init-elpa)
 (require 'init-packages)
 (require 'init-ui)
+(require 'init-lsp)
 
 (when (file-exists-p custom-file)
   (load-file custom-file))
