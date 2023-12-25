@@ -4,6 +4,7 @@
 /network-security.data
 /.session
 /session.*
+/custom.el
 *.elc
 CVS
 .svn
@@ -16,6 +17,7 @@ CVS
 cookies
 /newsticker
 \#*
+/tree-sitter
 /elpa
 /elpa-*
 site-lisp/package/
@@ -30,7 +32,7 @@ site-lisp/package/
 /helm-adaptive-history
 /thumbs/
 /emms/
-/smex-items
+/.smex-items
 /image-dired/
 /eshell
 /.cask/
@@ -50,16 +52,8 @@ site-lisp/package/
 .cache/
 /forge-database.sqlite
 /transient
-/preferences.*
-!/preferences.org
-/_minted-preferences
-projectile.cache
-/bookmarks
-/games/
-/nov-places
-/straight/repos
-/straight/build
-/straight/build-cache.el
-/request/
-persp-confs
-dired+.el
+/.lsp-session-v1
+/smex-items
+/eln-cache/
+/projects
+/forge-*.sqlite

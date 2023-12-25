@@ -9,3 +9,11 @@ git add .
 git commit -m "chore: separate lisp scripts"
 git remote add origin https://github.com/ScarboroughCoral/.emacs.d.git
 git branch -M main
+cd ~/.emacs.d/
+ls
+git status
+github
+ls
+ls -a
+git add .gitignore
+git status
