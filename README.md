@@ -1,0 +1,4 @@
+My Static config for Emacs
+Usage:
+
+mkdir ~/.emacs.d ln -s -r ./* ~/.emacs.d
