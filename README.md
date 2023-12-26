@@ -2,6 +2,6 @@
 
 ## Usage:
 ```bash
-mkdir ~/.emacs.d
-ln -s -r ./* ~/.emacs.d
+git clone https://github.com/ScarboroughCoral/.emacs.d.git $HOME/.emacs.d
+
 ```
