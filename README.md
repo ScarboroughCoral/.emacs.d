@@ -2,5 +2,6 @@
 
 ## Usage:
 ```bash
-mkdir ~/.emacs.d ln -s -r ./* ~/.emacs.d
+mkdir ~/.emacs.d
+ln -s -r ./* ~/.emacs.d
 ```
