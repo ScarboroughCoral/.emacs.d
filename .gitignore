@@ -21,6 +21,7 @@ cookies
 /tree-sitter
 /elpa
 /elpa-*
+/elpaca
 site-lisp/package/
 /swank
 /.mc-lists.el
@@ -35,7 +36,9 @@ site-lisp/package/
 /emms/
 /.smex-items
 /image-dired/
-/eshell
+/eshell/*
+!/eshell/aliases
+!/eshell/profile
 /.cask/
 /.sx/
 /org-clock-save.el
