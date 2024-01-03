@@ -519,7 +519,7 @@ You can use the bindings CTRL plus =/- for zooming in/out.  You can also use CTR
 [[https://magit.vc/manual/][Magit]] is a full-featured git client for Emacs.
 
 #+begin_src emacs-lisp
-(use-package magit)
+;;(use-package magit)
 
 #+end_src
 
