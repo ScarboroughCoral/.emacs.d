@@ -62,3 +62,5 @@ site-lisp/package/
 /projects
 /forge-*.sqlite
 /org-persist
+/fonts/*
+!/fonts/*.zip
