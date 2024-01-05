@@ -64,3 +64,4 @@ site-lisp/package/
 /org-persist
 /fonts/*
 !/fonts/*.zip
+sessions
