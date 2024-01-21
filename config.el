@@ -431,6 +431,7 @@
 (use-package haskell-mode)
 (use-package lua-mode)
 (use-package php-mode)
+(use-package sml-mode)
 
 (global-set-key [escape] 'keyboard-escape-quit)
 
