@@ -26,7 +26,10 @@
   - [[#magit][Magit]]
 - [[#highlight-todo][HIGHLIGHT TODO]]
 - [[#ivy-counsel][IVY (COUNSEL)]]
-- [[#language-support][Language Support]]
+- [[#language-support][LANGUAGE SUPPORT]]
+  - [[#web][Web]]
+  - [[#javascript][JavaScript]]
+  - [[#typescript][TypeScript]]
 - [[#minibuffer-escape][MINIBUFFER ESCAPE]]
 - [[#modeline][MODELINE]]
 - [[#neotree][NEOTREE]]
@@ -36,6 +39,7 @@
   - [[#diminish-org-indent-mode][Diminish Org Indent Mode]]
   - [[#org-level-headers][Org Level Headers]]
   - [[#source-code-block-tag-expansion][Source Code Block Tag Expansion]]
+  - [[#hide-emphasis-markers][Hide Emphasis Markers]]
 - [[#perspective][PERSPECTIVE]]
 - [[#projectile][PROJECTILE]]
 - [[#rainbow-delimiters][RAINBOW DELIMITERS]]
@@ -592,6 +596,60 @@ Emacs has built-in programming language modes for Lisp, Scheme, DSSSL, Ada, ASM,
 (use-package php-mode)
 (use-package sml-mode)
 #+end_src
+** Web
+#+begin_src emacs-lisp
+(use-package web-mode
+  :mode ("\\.html?\\'"
+         "\\.tsx\\'"
+         "\\.jsx\\'"
+         "\\.ts\\'"
+         "\\.js\\'")
+  :custom
+  (web-mode-css-indent-offset 2)
+  (web-mode-markup-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  (web-mode-enable-css-colorization t)
+  (web-mode-enable-auto-pairing t)
+  (web-mode-enable-comment-keywords t)
+  (web-mode-enable-current-element-highlight t)
+  (web-mode-enable-auto-quoting nil)
+  :config
+  (with-eval-after-load 'lsp-mode
+    ;; fix lsp incorrect indentation: https://github.com/emacs-lsp/lsp-mode/issues/2915
+    (setf (alist-get 'web-mode lsp--formatting-indent-alist) 'web-mode-code-indent-offset)
+    )
+  )
+#+end_src
+
+** JavaScript
+#+begin_src emacs-lisp
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :config
+  (setq-default js2-indent-level 2)
+  (setq-default js2-basic-offset 2)
+  (unbind-key "C-c C-f" js2-mode-map)
+  )
+#+end_src
+
+** TypeScript
+#+begin_src emacs-lisp
+(use-package tide
+  :after web-mode
+  :config
+  (defun shou/setup-tide-mode ()
+    "Set up Tide mode."
+    (interactive)
+    (when (or (string-equal "jsx" (file-name-extension buffer-file-name))
+              (string-equal "tsx" (file-name-extension buffer-file-name))
+              (string-equal "ts" (file-name-extension buffer-file-name)))
+      (lsp-deferred)
+      (tide-setup)))
+  (with-eval-after-load 'web-mode
+    (add-hook 'web-mode-hook #'shou/setup-tide-mode))
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
+#+end_src
 
 * MINIBUFFER ESCAPE
 By default, Emacs requires you to hit ESC three times to escape quit the minibuffer.  
@@ -701,6 +759,11 @@ Org-tempo is not a separate package but a module within org that can be enabled.
 
 #+begin_src emacs-lisp 
 (require 'org-tempo)
+#+end_src
+
+** Hide Emphasis Markers
+#+begin_src emacs-lisp
+(setq org-hide-emphasis-markers t)
 #+end_src
 
 * PERSPECTIVE

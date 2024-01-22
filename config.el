@@ -433,6 +433,52 @@
 (use-package php-mode)
 (use-package sml-mode)
 
+(use-package web-mode
+  :mode ("\\.html?\\'"
+         "\\.tsx\\'"
+         "\\.jsx\\'"
+         "\\.ts\\'"
+         "\\.js\\'")
+  :custom
+  (web-mode-css-indent-offset 2)
+  (web-mode-markup-indent-offset 2)
+  (web-mode-code-indent-offset 2)
+  (web-mode-enable-css-colorization t)
+  (web-mode-enable-auto-pairing t)
+  (web-mode-enable-comment-keywords t)
+  (web-mode-enable-current-element-highlight t)
+  (web-mode-enable-auto-quoting nil)
+  :config
+  (with-eval-after-load 'lsp-mode
+    ;; fix lsp incorrect indentation: https://github.com/emacs-lsp/lsp-mode/issues/2915
+    (setf (alist-get 'web-mode lsp--formatting-indent-alist) 'web-mode-code-indent-offset)
+    )
+  )
+
+(use-package js2-mode
+  :mode "\\.js\\'"
+  :config
+  (setq-default js2-indent-level 2)
+  (setq-default js2-basic-offset 2)
+  (unbind-key "C-c C-f" js2-mode-map)
+  )
+
+(use-package tide
+  :after web-mode
+  :config
+  (defun shou/setup-tide-mode ()
+    "Set up Tide mode."
+    (interactive)
+    (when (or (string-equal "jsx" (file-name-extension buffer-file-name))
+              (string-equal "tsx" (file-name-extension buffer-file-name))
+              (string-equal "ts" (file-name-extension buffer-file-name)))
+      (lsp-deferred)
+      (tide-setup)))
+  (with-eval-after-load 'web-mode
+    (add-hook 'web-mode-hook #'shou/setup-tide-mode))
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  (flycheck-add-next-checker 'javascript-eslint 'jsx-tide 'append))
+
 (global-set-key [escape] 'keyboard-escape-quit)
 
 (use-package doom-modeline
@@ -484,6 +530,8 @@
  '(org-level-7 ((t (:inherit outline-5 :height 1.1)))))
 
 (require 'org-tempo)
+
+(setq org-hide-emphasis-markers t)
 
 (use-package perspective
   :custom
